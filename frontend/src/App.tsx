@@ -1,12 +1,10 @@
-import { useState } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-     <div className= 'bg-gray-800'>
+     <div className= 'w-screen h-screen flex items-center justify-center bg-gray-800 text-white font-bold text-4xl '>
       HELLO
      </div>
     </>
