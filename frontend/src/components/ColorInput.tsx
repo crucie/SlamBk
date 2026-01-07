@@ -16,9 +16,9 @@ export function ColorInput({
   placeholder,
 }: ColorInputProps) {
   return (
-    <div className='form-group'>
-      <label htmlFor={name}>{label}</label>
-      <div className='color-input-wrapper'>
+    <div className='flex flex-col gap-2'>
+      <label htmlFor={name} className='text-sm font-bold text-yellow-300 pixel-font tracking-wide'>{label}</label>
+      <div className='flex gap-3 items-center'>
         <input
           id={name}
           type='text'
@@ -26,12 +26,13 @@ export function ColorInput({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
-          className='form-input'
+          className='flex-1 px-3 py-2 bg-gray-900 border-4 border-yellow-400 text-yellow-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 font-mono text-sm'
+          style={{imageRendering: 'pixelated'}}
         />
         {value && (
           <div 
-            className='color-preview'
-            style={{backgroundColor: value}}
+            className='w-10 h-10 border-4 border-yellow-400 shrink-0'
+            style={{backgroundColor: value, imageRendering: 'pixelated'}}
           ></div>
         )}
       </div>

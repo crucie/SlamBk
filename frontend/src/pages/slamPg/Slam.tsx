@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import './Slam.css'
-import { TextInput } from '../components/TextInput'
-import { TextAreaInput } from '../components/TextAreaInput'
-import { ColorInput } from '../components/ColorInput'
+import { TextInput } from '../../components/TextInput'
+import { TextAreaInput } from '../../components/TextAreaInput'
+import { ColorInput } from '../../components/ColorInput'
 
-function Slam() {
+interface SlamProps {
+  setCurrentPage?: (page: string) => void
+}
+
+function Slam({ setCurrentPage }: SlamProps) {
 
   const [draftData, setDraftData] = useState({
     fullName: '',
@@ -60,32 +63,37 @@ function Slam() {
   };
 
   return (
-    <div className='slam-container'>
+    <div className='min-h-screen bg-gray-950 text-yellow-300'>
       {/* Success Toast */}
       {saveSuccess && (
-        <div className='success-toast'>
-          <div className='toast-icon'>✓</div>
-          <span>Draft saved successfully!</span>
+        <div className='fixed top-4 left-1/2 -translate-x-1/2 bg-green-900 border-4 border-green-400 text-green-300 px-4 py-3 flex items-center gap-2 z-50 font-bold'>
+          <div className='text-lg'>▓</div>
+          <span>Draft saved!</span>
         </div>
       )}
 
       {/* Header */}
-      <div className='slam-header'>
-        <h1 className='slam-title'>SlamBk</h1>
-        <p className='slam-subtitle'>A Digital Slam Book</p>
+      <div className='bg-gray-900 border-b-4 border-yellow-400 px-6 py-6'>
+        {setCurrentPage && (
+          <button className='px-4 py-2 bg-red-900 border-3 border-red-400 text-red-200 font-bold hover:bg-red-800 mb-4 text-sm' onClick={() => setCurrentPage('home')}>
+            ◄ BACK
+          </button>
+        )}
+        <h1 className='text-5xl font-black text-yellow-400 tracking-widest pixel-font'>SLAMBK</h1>
+        <p className='text-yellow-300 text-sm mt-2 font-bold tracking-wide'>[ A Digital Slam Book ]</p>
       </div>
 
       {/* Form Container */}
-      <form className='slam-form' onSubmit={handleSaveDraft}>
+      <form className='max-w-4xl mx-auto px-6 py-8' onSubmit={handleSaveDraft}>
         
         {/* Basic Information */}
-        <div className='form-section'>
-          <div className='section-header'>
-            <h2 className='section-title'>Basic Information</h2>
-            <div className='section-divider'></div>
+        <div className='mb-8 bg-gray-900 border-4 border-cyan-400 p-4'>
+          <div className='flex items-center gap-2 mb-4'>
+            <h2 className='text-2xl font-black text-cyan-400 tracking-wide pixel-font'>BASIC INFO</h2>
+            <div className='flex-1 border-t-2 border-cyan-400'></div>
           </div>
           
-          <div className='form-grid'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <TextInput
               label='Full Name'
               name='fullName'
@@ -143,13 +151,13 @@ function Slam() {
         </div>
 
         {/* Favorites */}
-        <div className='form-section'>
-          <div className='section-header'>
-            <h2 className='section-title'>Favorites</h2>
-            <div className='section-divider'></div>
+        <div className='mb-8 bg-gray-900 border-4 border-pink-400 p-4'>
+          <div className='flex items-center gap-2 mb-4'>
+            <h2 className='text-2xl font-black text-pink-400 tracking-wide pixel-font'>FAVORITES</h2>
+            <div className='flex-1 border-t-2 border-pink-400'></div>
           </div>
           
-          <div className='form-grid'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
             <ColorInput
               label='Favorite Color'
               name='favoriteColor'
@@ -177,10 +185,10 @@ function Slam() {
         </div>
 
         {/* Personal Messages */}
-        <div className='form-section'>
-          <div className='section-header'>
-            <h2 className='section-title'>Personal Messages</h2>
-            <div className='section-divider'></div>
+        <div className='mb-8 bg-gray-900 border-4 border-green-400 p-4'>
+          <div className='flex items-center gap-2 mb-4'>
+            <h2 className='text-2xl font-black text-green-400 tracking-wide pixel-font'>MESSAGES</h2>
+            <div className='flex-1 border-t-2 border-green-400'></div>
           </div>
           
           <TextAreaInput
@@ -192,47 +200,53 @@ function Slam() {
             rows={4}
           />
           
-          <TextInput
-            label='One Word For Me'
-            name='oneWordForMe'
-            value={draftData.oneWordForMe}
-            onChange={handleChange}
-            placeholder='Describe me in one word'
-          />
+          <div className='mt-4'>
+            <TextInput
+              label='One Word For Me'
+              name='oneWordForMe'
+              value={draftData.oneWordForMe}
+              onChange={handleChange}
+              placeholder='Describe me in one word'
+            />
+          </div>
           
-          <TextAreaInput
-            label='Advice For Me'
-            name='adviceForMe'
-            value={draftData.adviceForMe}
-            onChange={(e) => setDraftData(prev => ({...prev, adviceForMe: e.target.value}))}
-            placeholder='Share your advice...'
-            rows={4}
-          />
+          <div className='mt-4'>
+            <TextAreaInput
+              label='Advice For Me'
+              name='adviceForMe'
+              value={draftData.adviceForMe}
+              onChange={(e) => setDraftData(prev => ({...prev, adviceForMe: e.target.value}))}
+              placeholder='Share your advice...'
+              rows={4}
+            />
+          </div>
           
-          <TextInput
-            label='Crush Name'
-            name='crushName'
-            value={draftData.crushName}
-            onChange={handleChange}
-            placeholder='(Optional)'
-          />
+          <div className='mt-4'>
+            <TextInput
+              label='Crush Name'
+              name='crushName'
+              value={draftData.crushName}
+              onChange={handleChange}
+              placeholder='(Optional)'
+            />
+          </div>
         </div>
 
         {/* Buttons */}
-        <div className='button-group'>
+        <div className='flex gap-4 mt-8'>
           <button 
             type='submit' 
-            className={`submit-button ${isSaving ? 'saving' : ''}`}
+            className={`flex-1 px-6 py-3 bg-blue-900 border-4 border-blue-400 text-blue-200 font-bold text-lg hover:bg-blue-800 transition-colors ${isSaving ? 'opacity-50 cursor-not-allowed' : 'active:bg-blue-700'}`}
             disabled={isSaving}
           >
-            {isSaving ? 'Saving...' : 'Save Draft'}
+            {isSaving ? '...SAVING...' : '[ SAVE DRAFT ]'}
           </button>
           <button 
             type='button' 
-            className='submit-button-secondary'
+            className='flex-1 px-6 py-3 bg-green-900 border-4 border-green-400 text-green-200 font-bold text-lg hover:bg-green-800 transition-colors active:bg-green-700'
             onClick={() => alert('Form will be submitted to backend')}
           >
-            Submit Form
+            [ SUBMIT ]
           </button>
         </div>
       </form>

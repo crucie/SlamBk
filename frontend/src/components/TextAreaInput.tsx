@@ -18,8 +18,8 @@ export function TextAreaInput({
   rows = 4,
 }: TextAreaInputProps) {
   return (
-    <div className='form-group full-width'>
-      <label htmlFor={name}>{label}</label>
+    <div className='flex flex-col gap-2 w-full'>
+      <label htmlFor={name} className='text-sm font-bold text-yellow-300 pixel-font tracking-wide'>{label}</label>
       <textarea
         id={name}
         name={name}
@@ -27,7 +27,8 @@ export function TextAreaInput({
         value={value}
         onChange={onChange}
         rows={rows}
-        className='form-textarea'
+        className='px-3 py-2 bg-gray-900 border-4 border-yellow-400 text-yellow-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-300 focus:border-yellow-300 font-mono text-sm resize-vertical'
+        style={{imageRendering: 'pixelated'}}
       />
     </div>
   );
