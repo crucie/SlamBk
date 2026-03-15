@@ -24,7 +24,10 @@ app.use("/api/v1/entries", entryRoutes)
 
 // Health check
 app.get("/", (req, res) => {
-    res.json({ message: "SlamBk Server Running 🚀" })
+    res.json({ 
+        message: "SlamBk Server Running 🚀",
+        cors_origin: process.env.CORS_ORIGIN || "NOT SET" 
+    })
 })
 
 // Global error handler
