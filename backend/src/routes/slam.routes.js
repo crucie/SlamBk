@@ -1,16 +1,22 @@
 import express from "express";
-
-import { 
-    getUsers,
-    getUser,
-    createUser,
-} from "../controllers/user.controller.js";
-
+import {
+  createSlambook,
+  getMySlambooks,
+  getSlambookById,
+  getPublicSlambook,
+  deleteSlambook,
+} from "../controllers/slambook.controller.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
-router.get("/", getUsers);
-router.get("/:id", getUser);
-router.post("/", createUser);
+// Public route
+router.get("/public/:slug", getPublicSlambook);
+
+// Protected routes
+router.post("/", verifyJWT, createSlambook);
+router.get("/my-slambooks", verifyJWT, getMySlambooks);
+router.get("/:id", verifyJWT, getSlambookById);
+router.delete("/:id", verifyJWT, deleteSlambook);
 
 export default router;
