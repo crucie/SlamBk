@@ -81,7 +81,7 @@ function Home() {
                 <img 
                   src={dashboardImg} 
                   alt="Dashboard Placeholder" 
-                  className='w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 opacity-100 group-hover:opacity-100'
+                  className='w-full h-full object-contain'
                 />
               </div>
             </div>
@@ -114,13 +114,13 @@ function Home() {
                 <div className='w-3 h-3 bg-red-500 rounded-full'></div>
                 <div className='w-3 h-3 bg-yellow-400 rounded-full'></div>
                 <div className='w-3 h-3 bg-green-500 rounded-full'></div>
-                <span className='ml-2 text-green-300 font-bold text-xs uppercase tracking-widest font-mono'>memories.png</span>
+                <span className='ml-2 text-green-300 font-bold text-xs uppercase tracking-widest font-mono'>AskYourCrush.png</span>
               </div>
               <div className='relative w-full h-full overflow-hidden border-2 border-green-900 bg-gray-950 flex flex-col items-center justify-center min-h-[200px]'>
                 <img 
                   src={createSlam} 
                   alt="Memories Placeholder" 
-                  className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100'
+                  className='w-full h-full object-cover'
                 />
               </div>
             </div>
@@ -137,7 +137,7 @@ function Home() {
                 <img 
                   src={questionsImg} 
                   alt="Profiles Placeholder" 
-                  className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100'
+                  className='w-full h-full object-cover'
                 />
               </div>
             </div>
