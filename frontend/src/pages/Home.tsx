@@ -33,11 +33,11 @@ function Home() {
             <div className='border-b-4 border-dashed border-gray-600 mb-6 w-3/4 mx-auto'></div>
 
             <p className='text-cyan-300 text-xl md:text-2xl font-bold tracking-wide mb-6 uppercase'>
-              [ Your Retro Digital Memory Gallery ]
+              [ A Retro Digital Memory Bank]
             </p>
 
             <p className='text-gray-300 max-w-2xl mx-auto text-base md:text-lg font-mono leading-relaxed'>
-              Capture memories, share laughs, and save inside jokes. Relive the nostalgic days of passing around a physical slam book with your friends, now fully digitized in this glorious 16-bit arcade edition.
+              What if your Crush could answer those questions?.
             </p>
           </div>
 
