@@ -72,7 +72,17 @@ function Auth() {
         </div>
       )}
 
+      {/* Back Button */}
+        <button 
+          onClick={() => navigate('/')}
+          className='mb-4 px-2 py-2 bg-gray-900 fixed top-4 left-4 border-4 border-cyan-400 text-cyan-300 font-bold hover:bg-cyan-900 hover:text-cyan-100 transition-colors flex items-center gap-2 active:bg-cyan-800 focus:outline-none'
+        >
+          {/* <span><--</span> */}
+          [ BACK ]
+        </button>
+
       <div className='w-full max-w-md'>
+
         {/* Header */}
         <div className='text-center mb-8 border-b-4 border-yellow-400 pb-6'>
           <h1 className='text-5xl font-black text-yellow-400 tracking-widest mb-2' style={{ fontFamily: '"Press Start 2P", monospace' }}>SLAMBK</h1>

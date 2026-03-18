@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import FormBuilder from './pages/FormBuilder'
 import PublicForm from './pages/PublicForm'
 import ViewEntries from './pages/ViewEntries'
+import Home from './pages/Home'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, loading } = useAuth()
@@ -21,6 +22,7 @@ function App() {
   return (
     <Routes>
       {/* Public routes */}
+      <Route path='/' element={<Home />} />
       <Route path='/auth' element={<Auth />} />
       <Route path='/s/:slug' element={<PublicForm />} />
 

@@ -1,183 +1,160 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
+import dashboardImg from "../../public/media/f.png"
+import createSlam from "../../public/media/e.png"
+import questionsImg from "../../public/media/c.png"
 
-interface User {
-  _id: string
-  nickName: string
-  fullName: string
-  contactNum: string
-}
 
 function Home() {
-  const [users, setUsers] = useState<User[]>([])
-  const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [showProfile, setShowProfile] = useState(false)
-
-  useEffect(() => {
-    axios.get('/api/users')
-      .then((response) => {
-        setUsers(response.data)
-      })
-      .catch((error) => {
-        console.log('found Error: ', error)
-      })
-  }, [])
-
-  const handleLogout = () => {
-    setIsLoggedIn(false)
-    setShowProfile(false)
-  }
+  const navigate = useNavigate();
 
   return (
-    <div className='min-h-screen bg-gray-950 text-yellow-300'>
-      {/* Header */}
-      <div className='bg-gray-900 border-b-4 border-yellow-400 px-6 py-6'>
-        <div className='max-w-7xl mx-auto flex items-center justify-between'>
-          <div>
-            <h1 className='text-5xl font-black text-yellow-400 tracking-widest pixel-font'>SLAMBK</h1>
-            <p className='text-yellow-300 text-sm mt-2 font-bold tracking-wide'>[ Memory Gallery ]</p>
+    <div className='min-h-screen bg-gray-950 text-yellow-300 flex flex-col items-center pt-16 pb-24 px-4 md:px-8 relative overflow-x-hidden'>
+      {/* Background Grid Pattern */}
+      <div 
+        className='fixed inset-0 z-0 opacity-20 pointer-events-none' 
+        style={{ 
+          backgroundImage: 'linear-gradient(to right, #374151 1px, transparent 1px), linear-gradient(to bottom, #374151 1px, transparent 1px)', 
+          backgroundSize: '40px 40px' 
+        }}
+      />
+
+      <div className='relative z-10 w-full max-w-6xl flex flex-col items-center text-center'>
+        
+        {/* ================= HERO SECTION ================= */}
+        <div className='w-full max-w-4xl flex flex-col items-center'>
+          <div className='mb-12 border-4 border-yellow-400 bg-gray-900 p-8 md:p-12 shadow-[8px_8px_0px_0px_rgba(250,204,21,1)] transition-transform hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(250,204,21,1)] duration-300'>
+            <h1 
+              className='text-5xl md:text-7xl font-black text-yellow-400 tracking-widest mb-6' 
+              style={{ fontFamily: '"Press Start 2P", monospace', lineHeight: '1.2' }}
+            >
+              SLAMBK
+            </h1>
+            
+            <div className='border-b-4 border-dashed border-gray-600 mb-6 w-3/4 mx-auto'></div>
+
+            <p className='text-cyan-300 text-xl md:text-2xl font-bold tracking-wide mb-6 uppercase'>
+              [ Your Retro Digital Memory Gallery ]
+            </p>
+
+            <p className='text-gray-300 max-w-2xl mx-auto text-base md:text-lg font-mono leading-relaxed'>
+              Capture memories, share laughs, and save inside jokes. Relive the nostalgic days of passing around a physical slam book with your friends, now fully digitized in this glorious 16-bit arcade edition.
+            </p>
           </div>
 
-          {/* Top Right Actions */}
-          <div className='flex gap-3 items-center'>
-            {/* Create Link Button */}
-            <button className='px-6 py-3 bg-cyan-900 border-4 border-cyan-400 text-cyan-200 font-bold hover:bg-cyan-800 transition-colors active:bg-cyan-700'>
-              [ CREATE LINK ]
+          {/* Call to Action Buttons */}
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-lg mb-12'>
+            <button 
+              onClick={() => navigate('/auth')}
+              className='group w-full px-6 py-4 bg-cyan-900 border-4 border-cyan-400 text-cyan-200 font-bold hover:bg-cyan-800 transition-all active:bg-cyan-700 hover:-translate-y-2 hover:shadow-[6px_6px_0px_0px_rgba(34,211,238,1)] text-lg flex items-center justify-center gap-3'
+            >
+              <span></span> [ GET STARTED ]
             </button>
-
-            {/* Profile/Auth Button */}
-            {isLoggedIn ? (
-              <div className='relative'>
-                <button
-                  onClick={() => setShowProfile(!showProfile)}
-                  className='w-12 h-12 bg-pink-900 border-4 border-pink-400 text-pink-300 font-bold hover:bg-pink-800 transition-colors flex items-center justify-center text-xl'
-                >
-                  👤
-                </button>
-
-                {/* Profile Dropdown */}
-                {showProfile && (
-                  <div className='absolute right-0 mt-2 bg-gray-900 border-4 border-pink-400 w-48 z-50'>
-                    <button className='w-full px-4 py-2 text-pink-300 font-bold border-b-2 border-pink-400 hover:bg-pink-900 text-left'>
-                      [ VIEW PROFILE ]
-                    </button>
-                    <button
-                      onClick={handleLogout}
-                      className='w-full px-4 py-3 text-red-300 font-bold hover:bg-red-900 text-left'
-                    >
-                      [ LOGOUT ]
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <button
-                onClick={() => setIsLoggedIn(true)}
-                className='px-6 py-3 bg-green-900 border-4 border-green-400 text-green-200 font-bold hover:bg-green-800 transition-colors active:bg-green-700'
-              >
-                [ LOGIN ]
-              </button>
-            )}
+            
+            <button 
+              onClick={() => navigate('/auth')}
+              className='group w-full px-6 py-4 bg-pink-900 border-4 border-pink-400 text-pink-200 font-bold hover:bg-pink-800 transition-all active:bg-pink-700 hover:-translate-y-2 hover:shadow-[6px_6px_0px_0px_rgba(244,114,182,1)] text-lg flex items-center justify-center gap-3'
+            >
+              <span></span> [ LOGIN ]
+            </button>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className='max-w-7xl mx-auto px-6 py-8'>
-        {/* Users Grid */}
-        <div className='mb-8'>
-          <h2 className='text-3xl font-black text-cyan-400 tracking-wide pixel-font mb-6'>
-            USERS DIRECTORY [ {users.length} ]
+
+        {/* ================= BENTO COLLAGE SECTION ================= */}
+        <div className='w-full mt-16 max-w-6xl'>
+          
+          <h2 className='text-3xl md:text-4xl text-center font-black text-pink-400 tracking-widest mb-12 animate-pulse' style={{ fontFamily: '"Press Start 2P", monospace' }}>
+            [ SNEAK PEEK ]
           </h2>
 
-          {/* Users Grid Container */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-            {users?.map((user: User) => (
-              <div
-                key={user._id}
-                onClick={() => setSelectedUser(selectedUser?._id === user._id ? null : user)}
-                className={`cursor-pointer transition-all transform hover:scale-105 ${
-                  selectedUser?._id === user._id
-                    ? 'bg-cyan-900 border-4 border-cyan-300 shadow-lg'
-                    : 'bg-gray-900 border-4 border-cyan-400 hover:border-cyan-300'
-                }`}
-              >
-                {/* User Card */}
-                <div className='p-4'>
-                  {/* Profile Icon */}
-                  <div className='text-5xl text-center mb-4 font-bold'>👤</div>
-
-                  {/* User Info */}
-                  <div className='text-center space-y-2 border-t-2 border-cyan-400 pt-4'>
-                    <h3 className='text-xl font-black text-cyan-300 tracking-wide'>
-                      {user.nickName?.toUpperCase() || 'UNKNOWN'}
-                    </h3>
-                    <p className='text-sm text-yellow-300 font-bold'>
-                      {user.fullName || 'N/A'}
-                    </p>
-                    <p className='text-xs text-green-400 font-mono'>
-                      {user.contactNum || 'No Contact'}
-                    </p>
-                  </div>
-
-                  {/* Selection Indicator */}
-                  {selectedUser?._id === user._id && (
-                    <div className='mt-4 text-center text-yellow-400 font-bold'>
-                      ► SELECTED ◄
-                    </div>
-                  )}
-                </div>
+          <div className='grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 auto-rows-min'>
+            
+            {/* Box 1: Main Dashboard Image Spot spanning heavily */}
+            <div className='md:col-span-8 md:row-span-2 bg-gray-900 border-4 border-cyan-400 p-2 shadow-[8px_8px_0px_0px_rgba(34,211,238,1)] flex flex-col hover:-translate-y-1 transition-transform group'>
+              <div className='bg-cyan-950 border-b-4 border-cyan-400 p-2 flex gap-2 items-center mb-2'>
+                <div className='w-3 h-3 bg-red-500 rounded-full'></div>
+                <div className='w-3 h-3 bg-yellow-400 rounded-full'></div>
+                <div className='w-3 h-3 bg-green-500 rounded-full'></div>
+                <span className='ml-2 text-cyan-300 font-bold text-xs uppercase tracking-widest font-mono'>dashboard.exe</span>
               </div>
-            ))}
-          </div>
-
-          {/* Empty State */}
-          {users.length === 0 && (
-            <div className='bg-gray-900 border-4 border-yellow-400 p-8 text-center'>
-              <p className='text-2xl font-black text-yellow-400 pixel-font'>NO USERS FOUND</p>
-              <p className='text-yellow-300 mt-2'>Start creating slams to see memories here!</p>
+              <div className='relative w-full h-full overflow-hidden border-2 border-cyan-900 bg-gray-950 flex flex-col items-center justify-center min-h-[300px]'>
+                <img 
+                  src={dashboardImg} 
+                  alt="Dashboard Placeholder" 
+                  className='w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 opacity-100 group-hover:opacity-100'
+                />
+              </div>
             </div>
-          )}
+
+            {/* Box 2: Quote Block (Pink) */}
+            <div className='md:col-span-4 bg-pink-600 border-4 border-pink-400 p-8 shadow-[8px_8px_0px_0px_rgba(244,114,182,1)] flex flex-col items-center justify-center text-center hover:bg-pink-500 transition-colors'>
+              <span className='text-6xl mb-6 drop-shadow-lg'></span>
+              <h3 className='text-white font-black text-xl md:text-2xl uppercase tracking-widest leading-loose' style={{ fontFamily: '"Press Start 2P", monospace' }}>
+                "BECAUSE FORGETTING YOUR BESTIE'S CRUSH IS A CRIME!"
+              </h3>
+            </div>
+
+            {/* Box 3: Data / Stat Block (Yellow) */}
+            <div className='md:col-span-4 bg-yellow-400 border-4 border-yellow-600 p-8 shadow-[8px_8px_0px_0px_rgba(217,119,6,1)] flex flex-col items-center text-center hover:bg-yellow-300 transition-colors text-gray-900 justify-center min-h-[250px]'>
+               <span className='text-5xl mb-4'></span>
+              <p className='font-bold text-lg font-mono uppercase tracking-widest leading-relaxed'>
+                
+              </p>
+              <div className='text-4xl text-black mt-4 mb-2 font-black' style={{ fontFamily: '"Press Start 2P", monospace' }}>
+                Was She Hot?
+              </div>
+              <p className='font-bold text-sm font-mono uppercase tracking-widest opacity-80'>
+                bet she was!
+              </p>
+            </div>
+
+            {/* Box 4: Secondary Image Spot */}
+            <div className='md:col-span-6 bg-gray-900 border-4 border-green-400 p-2 shadow-[8px_8px_0px_0px_rgba(74,222,128,1)] flex flex-col hover:-translate-y-1 transition-transform group'>
+              <div className='bg-green-950 border-b-4 border-green-400 p-2 flex gap-2 items-center mb-2'>
+                <div className='w-3 h-3 bg-red-500 rounded-full'></div>
+                <div className='w-3 h-3 bg-yellow-400 rounded-full'></div>
+                <div className='w-3 h-3 bg-green-500 rounded-full'></div>
+                <span className='ml-2 text-green-300 font-bold text-xs uppercase tracking-widest font-mono'>memories.png</span>
+              </div>
+              <div className='relative w-full h-full overflow-hidden border-2 border-green-900 bg-gray-950 flex flex-col items-center justify-center min-h-[200px]'>
+                <img 
+                  src={createSlam} 
+                  alt="Memories Placeholder" 
+                  className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100'
+                />
+              </div>
+            </div>
+
+            {/* Box 5: Tertiary Image Spot (Purple) */}
+            <div className='md:col-span-6 bg-gray-900 border-4 border-purple-400 p-2 shadow-[8px_8px_0px_0px_rgba(192,132,252,1)] flex flex-col hover:-translate-y-1 transition-transform group'>
+              <div className='bg-purple-950 border-b-4 border-purple-400 p-2 flex gap-2 items-center mb-2'>
+                <div className='w-3 h-3 bg-red-500 rounded-full'></div>
+                <div className='w-3 h-3 bg-yellow-400 rounded-full'></div>
+                <div className='w-3 h-3 bg-green-500 rounded-full'></div>
+                <span className='ml-2 text-purple-300 font-bold text-xs uppercase tracking-widest font-mono'>questions.gif</span>
+              </div>
+              <div className='relative w-full h-full overflow-hidden border-2 border-purple-900 bg-gray-950 flex flex-col items-center justify-center min-h-[200px]'>
+                <img 
+                  src={questionsImg} 
+                  alt="Profiles Placeholder" 
+                  className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100'
+                />
+              </div>
+            </div>
+            
+          </div>
         </div>
 
-        {/* Selected User Details */}
-        {selectedUser && (
-          <div className='bg-gray-900 border-4 border-pink-400 p-8 mt-8'>
-            <h3 className='text-3xl font-black text-pink-400 tracking-wide pixel-font mb-6'>
-              PROFILE [ {selectedUser.nickName.toUpperCase()} ]
-            </h3>
+        {/* Footer Icons */}
+        <div className='flex gap-10 text-5xl opacity-80 animate-bounce mt-24 mb-12'>
+          <span className='hover:scale-125 transition-transform cursor-pointer'>🎮</span>
+          <span className='hover:scale-125 transition-transform cursor-pointer'>👾</span>
+          <span className='hover:scale-125 transition-transform cursor-pointer'>🕹️</span>
+        </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6 border-t-2 border-pink-400 pt-6'>
-              <div>
-                <p className='text-yellow-400 font-bold text-sm mb-2'>NICKNAME:</p>
-                <p className='text-yellow-300 text-lg font-mono'>{selectedUser.nickName}</p>
-              </div>
-
-              <div>
-                <p className='text-yellow-400 font-bold text-sm mb-2'>FULL NAME:</p>
-                <p className='text-yellow-300 text-lg font-mono'>{selectedUser.fullName}</p>
-              </div>
-
-              <div>
-                <p className='text-yellow-400 font-bold text-sm mb-2'>CONTACT:</p>
-                <p className='text-yellow-300 text-lg font-mono'>{selectedUser.contactNum}</p>
-              </div>
-
-              <div className='flex gap-2'>
-                <button className='flex-1 px-4 py-3 bg-blue-900 border-4 border-blue-400 text-blue-200 font-bold hover:bg-blue-800 transition-colors'>
-                  [ ADD MEMORY ]
-                </button>
-                <button className='flex-1 px-4 py-3 bg-green-900 border-4 border-green-400 text-green-200 font-bold hover:bg-green-800 transition-colors'>
-                  [ VIEW MEMORIES ]
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
